@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    .container { width: 80%; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+    .header { background-color: #f4f4f4; padding: 10px; text-align: center; }
+    .highlight { color: #007bff; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>New Order Notification</h2>
+    </div>
+    <p>Dear Admin,</p>
+    <p>A new order has been placed on your e-commerce store. Please find the details below:</p>
+    <h3>Order Summary:</h3>
+    <ul>
+      <li><strong>Order ID:</strong> <span class="highlight">{{order_id}}</span></li>
+      <li><strong>Customer Name:</strong> {{user_name}}</li>
+      <li><strong>Customer Email:</strong> {{user_email}}</li>
+      <li><strong>Total Amount:</strong> <span class="highlight">{{total_amount}}</span></li>
+    </ul>
+    <h3>Shipping Details:</h3>
+    <p>{{shipping_address}}</p>
+    <p>Please log in to the admin panel for more details and to process the order.</p>
+    <p>Thank you,</p>
+    <p>The E-Commerce System</p>
+  </div>
+</body>
+</html>

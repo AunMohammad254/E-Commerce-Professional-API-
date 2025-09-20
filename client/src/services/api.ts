@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api';
 
 const api = axios.create({
     baseURL: API_URL,
@@ -26,8 +26,17 @@ api.interceptors.response.use(
         return response;
     },
     (error) => {
+        // Only redirect to login for 401 errors if we're not already on auth pages
+        // and if it's not an initial auth check
         if (error.response?.status === 401) {
-            window.location.href = '/login';
+            const currentPath = window.location.pathname;
+            const isAuthPage = currentPath === '/login' || currentPath === '/register';
+            const isProfileCheck = error.config?.url?.includes('/users/profile');
+            
+            // Don't redirect if we're on auth pages or if it's an initial profile check
+            if (!isAuthPage && !isProfileCheck) {
+                window.location.href = '/login';
+            }
         }
         return Promise.reject(error);
     }

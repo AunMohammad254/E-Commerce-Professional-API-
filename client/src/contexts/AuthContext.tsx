@@ -87,8 +87,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             } else {
                 dispatch({ type: 'SET_USER', payload: null });
             }
-        } catch (error) {
+        } catch (error: any) {
+            // Don't redirect on initial auth check - just set user as null
             dispatch({ type: 'SET_USER', payload: null });
+            // Only log non-401 errors to avoid spam
+            if (error.response?.status !== 401) {
+                console.error('Auth check failed:', error);
+            }
         } finally {
             dispatch({ type: 'SET_LOADING', payload: false });
         }

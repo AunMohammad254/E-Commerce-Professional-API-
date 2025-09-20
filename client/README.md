@@ -1,46 +1,122 @@
-# Getting Started with Create React App
+# E-Commerce Client Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern React-based e-commerce frontend with EmailJS integration for order confirmations.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- 🛒 Shopping cart functionality
+- 👤 User authentication
+- 📧 Email notifications via EmailJS
+- 📱 Responsive design
+- 🎨 Modern UI with animations
 
-### `npm start`
+## EmailJS Configuration
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This application uses EmailJS to send order confirmation emails to customers and admin notifications.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Setup Instructions
 
-### `npm test`
+1. **Create EmailJS Account**
+   - Visit [EmailJS.com](https://www.emailjs.com/) and create an account
+   - Create a new service (Gmail, Outlook, etc.)
+   - Note your Service ID
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Create Email Templates**
+   
+   **User Confirmation Template:**
+   - Template ID: `template_user_confirmation`
+   - Subject: `Order Confirmation - {{order_id}}`
+   - Content should include: `{{to_name}}`, `{{order_id}}`, `{{order_date}}`, `{{total_amount}}`, `{{items_list}}`
+   
+   **Admin Notification Template:**
+   - Template ID: `template_admin_notification`
+   - Subject: `New Order Received - {{order_id}}`
+   - Content should include: `{{customer_name}}`, `{{customer_email}}`, `{{order_id}}`, `{{total_amount}}`, `{{items_list}}`
 
-### `npm run build`
+3. **Configure Environment Variables**
+   
+   Copy `.env.example` to `.env` and update with your EmailJS credentials:
+   
+   ```env
+   REACT_APP_EMAILJS_SERVICE_ID=your_service_id
+   REACT_APP_EMAILJS_TEMPLATE_ID_USER=template_user_confirmation
+   REACT_APP_EMAILJS_TEMPLATE_ID_ADMIN=template_admin_notification
+   REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Template Parameters**
+   
+   Ensure your EmailJS templates include these parameters:
+   
+   **User Template:**
+   - `{{to_email}}` - Customer email
+   - `{{to_name}}` - Customer name
+   - `{{order_id}}` - Unique order identifier
+   - `{{order_date}}` - Order timestamp
+   - `{{total_amount}}` - Order total
+   - `{{items_list}}` - List of ordered items
+   - `{{user_phone}}` - Customer phone
+   - `{{shipping_address}}` - Delivery address
+   
+   **Admin Template:**
+   - `{{to_email}}` - Admin email (aunmohammad254@gmail.com)
+   - `{{customer_name}}` - Customer name
+   - `{{customer_email}}` - Customer email
+   - `{{order_id}}` - Unique order identifier
+   - `{{total_amount}}` - Order total
+   - `{{items_list}}` - List of ordered items
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Troubleshooting
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Common Issues:**
 
-### `npm run eject`
+1. **400 Bad Request Error**
+   - Check that all environment variables are set correctly
+   - Verify template IDs match exactly in EmailJS dashboard
+   - Ensure public key is correct
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. **401 Unauthorized Error**
+   - Verify your EmailJS public key
+   - Check service configuration in EmailJS dashboard
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **404 Template Not Found**
+   - Confirm template IDs in `.env` match EmailJS dashboard
+   - Ensure templates are published/active
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+4. **Network Errors**
+   - Check internet connection
+   - Verify EmailJS service status
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Debug Mode:**
+The application includes detailed logging. Check browser console for:
+- Configuration validation results
+- Email sending attempts
+- Detailed error messages
 
-## Learn More
+## Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Development
+
+```bash
+npm start
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Environment Variables
+
+Required environment variables (see `.env.example`):
+
+- `REACT_APP_API_URL` - Backend API URL
+- `REACT_APP_EMAILJS_SERVICE_ID` - EmailJS Service ID
+- `REACT_APP_EMAILJS_TEMPLATE_ID_USER` - User confirmation template ID
+- `REACT_APP_EMAILJS_TEMPLATE_ID_ADMIN` - Admin notification template ID
+- `REACT_APP_EMAILJS_PUBLIC_KEY` - EmailJS Public Key

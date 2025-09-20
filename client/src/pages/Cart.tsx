@@ -5,10 +5,11 @@ import Layout from '../components/Layout/Layout';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'react-toastify';
+import { emailService, OrderDetails } from '../services/emailService';
 
 const Cart: React.FC = () => {
     const { items, totalAmount, updateQuantity, removeFromCart, clearCart } = useCart();
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, user } = useAuth();
     const navigate = useNavigate();
     const [isCheckingOut, setIsCheckingOut] = useState(false);
 
@@ -32,14 +33,52 @@ const Cart: React.FC = () => {
             return;
         }
 
+        if (!user) {
+            toast.error('User information not available');
+            return;
+        }
+
         setIsCheckingOut(true);
         try {
+            // Generate order details for email
+            const orderId = `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+            const orderDate = new Date().toLocaleString();
+            
+            const orderDetails: OrderDetails = {
+                orderId,
+                items,
+                totalAmount,
+                orderDate,
+                user
+            };
+
+            // Send confirmation emails before clearing cart
+            toast.info('Sending confirmation emails...');
+            const emailResults = await emailService.sendOrderConfirmationEmails(orderDetails);
+            
+            if (emailResults.userEmailSent) {
+                toast.success('Confirmation email sent to your email address!');
+            } else {
+                toast.warning(`Failed to send confirmation email: ${emailResults.userMessage}`);
+                console.error('User email error:', emailResults.userMessage);
+            }
+
+            if (emailResults.adminEmailSent) {
+                console.log('Admin notification email sent successfully');
+            } else {
+                console.warn('Failed to send admin notification email:', emailResults.adminMessage);
+                // Don't show user-facing error for admin email failures
+            }
+
             // Simulate checkout process
             await new Promise(resolve => setTimeout(resolve, 2000));
-            toast.success('Order placed successfully!');
+            
+            // Clear cart and show success message
             clearCart();
+            toast.success('Order placed successfully!');
             navigate('/orders');
         } catch (error) {
+            console.error('Checkout error:', error);
             toast.error('Checkout failed. Please try again.');
         } finally {
             setIsCheckingOut(false);
@@ -97,7 +136,7 @@ const Cart: React.FC = () => {
     const itemImageStyle: React.CSSProperties = {
         width: '80px',
         height: '80px',
-        objectFit: 'cover',
+        objectFit: 'contain',
         borderRadius: '8px',
     };
 
@@ -332,7 +371,7 @@ const Cart: React.FC = () => {
                                     whileHover={!isCheckingOut ? { scale: 1.02 } : {}}
                                     whileTap={!isCheckingOut ? { scale: 0.98 } : {}}
                                 >
-                                    {isCheckingOut ? 'Processing...' : 'Proceed to Checkout'}
+                                    {isCheckingOut ? 'Processing...' : (isAuthenticated ? 'Place Order' : 'Login to Order')}
                                 </motion.button>
                             </motion.div>
                         </>

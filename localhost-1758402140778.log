@@ -1,0 +1,75 @@
+react-dom-client.development.js:24870 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+emailService.ts:27 EmailJS is not properly configured. Please check your environment variables:
+isEmailJSConfigured @ emailService.ts:27
+emailService.ts:28 - REACT_APP_EMAILJS_SERVICE_ID: service_lqqiban
+isEmailJSConfigured @ emailService.ts:28
+emailService.ts:29 - REACT_APP_EMAILJS_TEMPLATE_ID_USER: template_x7uoeji
+isEmailJSConfigured @ emailService.ts:29
+emailService.ts:30 - REACT_APP_EMAILJS_TEMPLATE_ID_ADMIN: template_9w53v3n
+isEmailJSConfigured @ emailService.ts:30
+emailService.ts:31 - REACT_APP_EMAILJS_PUBLIC_KEY: SET
+isEmailJSConfigured @ emailService.ts:31
+emailService.ts:32 Please refer to the setup instructions in src/templates/emailTemplates.md
+isEmailJSConfigured @ emailService.ts:32
+emailService.ts:47 EmailJS initialization skipped due to missing configuration
+./src/services/emailService.ts @ emailService.ts:47
+emailService.ts:27 EmailJS is not properly configured. Please check your environment variables:
+isEmailJSConfigured @ emailService.ts:27
+emailService.ts:28 - REACT_APP_EMAILJS_SERVICE_ID: service_lqqiban
+isEmailJSConfigured @ emailService.ts:28
+emailService.ts:29 - REACT_APP_EMAILJS_TEMPLATE_ID_USER: template_x7uoeji
+isEmailJSConfigured @ emailService.ts:29
+emailService.ts:30 - REACT_APP_EMAILJS_TEMPLATE_ID_ADMIN: template_9w53v3n
+isEmailJSConfigured @ emailService.ts:30
+emailService.ts:31 - REACT_APP_EMAILJS_PUBLIC_KEY: SET
+isEmailJSConfigured @ emailService.ts:31
+emailService.ts:32 Please refer to the setup instructions in src/templates/emailTemplates.md
+isEmailJSConfigured @ emailService.ts:32
+emailService.ts:27 EmailJS is not properly configured. Please check your environment variables:
+isEmailJSConfigured @ emailService.ts:27
+emailService.ts:28 - REACT_APP_EMAILJS_SERVICE_ID: service_lqqiban
+isEmailJSConfigured @ emailService.ts:28
+emailService.ts:29 - REACT_APP_EMAILJS_TEMPLATE_ID_USER: template_x7uoeji
+isEmailJSConfigured @ emailService.ts:29
+emailService.ts:30 - REACT_APP_EMAILJS_TEMPLATE_ID_ADMIN: template_9w53v3n
+isEmailJSConfigured @ emailService.ts:30
+emailService.ts:31 - REACT_APP_EMAILJS_PUBLIC_KEY: SET
+isEmailJSConfigured @ emailService.ts:31
+emailService.ts:32 Please refer to the setup instructions in src/templates/emailTemplates.md
+isEmailJSConfigured @ emailService.ts:32
+emailConfigValidator.ts:60 ❌ EmailJS configuration validation failed:
+logConfigurationStatus @ emailConfigValidator.ts:60
+emailConfigValidator.ts:61   - EmailJS configuration is missing or incomplete
+(anonymous) @ emailConfigValidator.ts:61
+emailConfigValidator.ts:61   - Please check your .env file and ensure all EmailJS variables are set
+(anonymous) @ emailConfigValidator.ts:61
+emailConfigValidator.ts:60 ❌ EmailJS configuration validation failed:
+logConfigurationStatus @ emailConfigValidator.ts:60
+emailConfigValidator.ts:61   - EmailJS configuration is missing or incomplete
+(anonymous) @ emailConfigValidator.ts:61
+emailConfigValidator.ts:61   - Please check your .env file and ensure all EmailJS variables are set
+(anonymous) @ emailConfigValidator.ts:61
+:3002/:1 Access to XMLHttpRequest at 'http://localhost:3000/api/users/profile' from origin 'http://localhost:3002' has been blocked by CORS policy: The 'Access-Control-Allow-Origin' header has a value 'http://localhost:3001' that is not equal to the supplied origin.
+AuthContext.tsx:95 Auth check failed: AxiosError
+checkAuthStatus @ AuthContext.tsx:95
+:3000/api/users/profile:1  Failed to load resource: net::ERR_FAILED
+:3002/:1 Access to XMLHttpRequest at 'http://localhost:3000/api/users/profile' from origin 'http://localhost:3002' has been blocked by CORS policy: The 'Access-Control-Allow-Origin' header has a value 'http://localhost:3001' that is not equal to the supplied origin.
+AuthContext.tsx:95 Auth check failed: AxiosError
+checkAuthStatus @ AuthContext.tsx:95
+:3000/api/users/profile:1  Failed to load resource: net::ERR_FAILED
+:3002/:1 Access to XMLHttpRequest at 'http://localhost:3000/api/products/external' from origin 'http://localhost:3002' has been blocked by CORS policy: The 'Access-Control-Allow-Origin' header has a value 'http://localhost:3001' that is not equal to the supplied origin.
+Home.tsx:52 Failed to fetch featured products: AxiosError
+fetchFeaturedProducts @ Home.tsx:52
+:3000/api/products/external:1  Failed to load resource: net::ERR_FAILED
+:3002/:1 Access to XMLHttpRequest at 'http://localhost:3000/api/products/external' from origin 'http://localhost:3002' has been blocked by CORS policy: The 'Access-Control-Allow-Origin' header has a value 'http://localhost:3001' that is not equal to the supplied origin.
+Home.tsx:52 Failed to fetch featured products: AxiosError
+fetchFeaturedProducts @ Home.tsx:52
+:3000/api/products/external:1  Failed to load resource: net::ERR_FAILED
+products:1 Access to XMLHttpRequest at 'http://localhost:3000/api/products/external' from origin 'http://localhost:3002' has been blocked by CORS policy: The 'Access-Control-Allow-Origin' header has a value 'http://localhost:3001' that is not equal to the supplied origin.
+Products.tsx:41 Failed to fetch products: AxiosError
+fetchProducts @ Products.tsx:41
+:3000/api/products/external:1  Failed to load resource: net::ERR_FAILED
+products:1 Access to XMLHttpRequest at 'http://localhost:3000/api/products/external' from origin 'http://localhost:3002' has been blocked by CORS policy: The 'Access-Control-Allow-Origin' header has a value 'http://localhost:3001' that is not equal to the supplied origin.
+Products.tsx:41 Failed to fetch products: AxiosError
+fetchProducts @ Products.tsx:41
+:3000/api/products/external:1  Failed to load resource: net::ERR_FAILED

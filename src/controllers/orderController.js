@@ -7,17 +7,49 @@ const createOrder = async (req, res) => {
     try {
         const { items, shippingAddress, paymentMethod, paymentDetails } = req.body;
 
+        // Validate required fields
+        if (!items || !Array.isArray(items) || items.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'Items array is required and cannot be empty'
+            });
+        }
+
+        if (!shippingAddress) {
+            return res.status(400).json({
+                success: false,
+                message: 'Shipping address is required'
+            });
+        }
+
         // Validate items and calculate total
         let totalAmount = 0;
         const orderItems = [];
 
         for (const item of items) {
-            const product = await Product.findById(item.product);
+            // Handle both 'product' and 'productId' field names for flexibility
+            const productId = item.product || item.productId;
+            
+            if (!productId) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Product ID is required for each item'
+                });
+            }
+
+            if (!item.quantity || item.quantity <= 0) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Valid quantity is required for each item'
+                });
+            }
+
+            const product = await Product.findById(productId);
             
             if (!product || product.isDeleted) {
                 return res.status(400).json({
                     success: false,
-                    message: `Product ${item.product} not found`
+                    message: `Product ${productId} not found`
                 });
             }
 
@@ -37,7 +69,7 @@ const createOrder = async (req, res) => {
             totalAmount += price * item.quantity;
 
             orderItems.push({
-                product: item.product,
+                product: productId,
                 quantity: item.quantity,
                 price
             });
@@ -83,15 +115,22 @@ const createOrder = async (req, res) => {
 // Get User Orders
 const getUserOrders = async (req, res) => {
     try {
+        console.log('Fetching orders for user:', req.user.id);
+        
         const orders = await Order.find({ user: req.user.id })
             .populate('items.product', 'title thumbnail price')
             .sort({ createdAt: -1 });
 
+        console.log('Found orders:', orders.length);
+
         res.status(200).json({
             success: true,
-            orders
+            orders,
+            count: orders.length,
+            message: `Found ${orders.length} orders for user`
         });
     } catch (error) {
+        console.error('Error fetching orders:', error);
         res.status(500).json({
             success: false,
             message: 'Failed to fetch orders',

@@ -147,7 +147,7 @@ const Products: React.FC = () => {
     const imageStyle: React.CSSProperties = {
         width: '100%',
         height: '200px',
-        objectFit: 'cover',
+        objectFit: 'contain',
     };
 
     const contentStyle: React.CSSProperties = {

@@ -1,9 +1,10 @@
 const emailjs = require('emailjs-com');
 
-const SERVICE_ID = 'service_lqqiban';
-const TEMPLATE_ID = 'template_default'; // You'll need to create this in EmailJS
-const USER_ID = 'YOUR_EMAILJS_USER_ID'; // Add your EmailJS user ID
-const ADMIN_EMAIL = 'aunmohammad254@gmail.com';
+// Use environment variables for EmailJS configuration
+const SERVICE_ID = process.env.EMAILJS_SERVICE_ID || 'service_lqqiban';
+const TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID || 'template_x7uoeji';
+const USER_ID = process.env.EMAILJS_USER_ID || 'Aun';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'aunmohammad254@gmail.com';
 
 const sendOrderConfirmation = async (order) => {
     try {

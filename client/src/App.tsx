@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
+import { validateEmailConfiguration, logConfigurationStatus } from './utils/emailConfigValidator';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import Cart from './pages/Cart';
+import About from './pages/About';
+import Profile from './pages/Profile';
+import Orders from './pages/Orders';
 
 function App() {
+  useEffect(() => {
+    // Validate EmailJS configuration on app startup
+    const checkEmailConfig = async () => {
+      try {
+        const validationResult = await validateEmailConfiguration();
+        logConfigurationStatus(validationResult);
+      } catch (error) {
+        console.error('Failed to validate EmailJS configuration:', error);
+      }
+    };
+
+    checkEmailConfig();
+  }, []);
+
   return (
     <AuthProvider>
       <CartProvider>
@@ -23,6 +41,9 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/products" element={<Products />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/orders" element={<Orders />} />
             </Routes>
             
             <ToastContainer
