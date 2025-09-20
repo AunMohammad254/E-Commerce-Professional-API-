@@ -197,6 +197,8 @@ const deleteProduct = async (req, res) => {
 // Fetch External Products (from DummyJSON)
 const fetchExternalProducts = async (req, res) => {
     try {
+        // Use node-fetch or axios to make the API call
+        const fetch = (await import('node-fetch')).default;
         const response = await fetch('https://dummyjson.com/products');
         const data = await response.json();
 
@@ -205,6 +207,7 @@ const fetchExternalProducts = async (req, res) => {
             products: data.products
         });
     } catch (error) {
+        console.error('External API Error:', error);
         res.status(500).json({
             success: false,
             message: 'Failed to fetch external products',

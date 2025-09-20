@@ -1,7 +1,12 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-here';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+    console.error('Error: JWT_SECRET is not defined in the .env file.');
+    process.exit(1);
+}
 
 const authenticate = async (req, res, next) => {
     try {
